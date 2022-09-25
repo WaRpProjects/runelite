@@ -29,13 +29,12 @@ import javax.annotation.Nullable;
 /**
  * Represents a non-player character in the game.
  */
-public interface NPC extends Actor
-{
+public interface NPC extends Actor, Locatable {
 	/**
 	 * Gets the ID of the NPC.
 	 *
 	 * @return the ID of the NPC
-	 * @see NpcID
+	 * //@see NpcID
 	 */
 	int getId();
 
@@ -68,4 +67,16 @@ public interface NPC extends Actor
 	 */
 	@Nullable
 	NPCComposition getTransformedComposition();
+
+	void setTransformedComposition(NPCComposition composition);
+
+	int getTransformedId();
+
+	String getTransformedName();
+
+	int getTransformedLevel();
+
+	void setComposition(NPCComposition composition);
+
+	void onDefinitionChanged(NPCComposition composition);
 }

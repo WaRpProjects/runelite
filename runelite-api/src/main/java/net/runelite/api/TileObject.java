@@ -35,7 +35,7 @@ import net.runelite.api.coords.WorldPoint;
 /**
  * Represents an object on a Tile
  */
-public interface TileObject
+public interface TileObject extends SceneEntity
 {
 	long getHash();
 
@@ -130,4 +130,21 @@ public interface TileObject
 	 */
 	@Nullable
 	Shape getClickbox();
+
+
+	String getName();
+
+	String[] getActions();
+
+	/**
+	 * Gets the menu actions of the object
+	 */
+
+	Point menuPoint();
+
+	ObjectComposition getTransformedComposition();
+
+	void setTransformedComposition(ObjectComposition composition);
+
+	int getActualId();
 }

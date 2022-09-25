@@ -649,6 +649,15 @@ public interface Client extends OAuthApi, GameEngine
 	 */
 	MenuEntry createMenuEntry(int idx);
 
+
+	MenuEntry createMenuEntry(String option, String target, int identifier, int opcode, int param1, int param2, int itemId, boolean forceLeftClick);
+
+	/**
+	 * Gets an array of currently open right-click menu entries that can be
+	 * clicked and activated.
+	 *
+	 * @return array of open menu entries
+	 */
 	/**
 	 * Gets an array of currently open right-click menu entries that can be
 	 * clicked and activated.
@@ -2030,4 +2039,8 @@ public interface Client extends OAuthApi, GameEngine
 	 * @return client ticks
 	 */
 	int getIdleTimeout();
+
+    void setSelectedSpellWidget(int id);
+
+	void setSelectedSpellChildIndex(int i);
 }

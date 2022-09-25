@@ -24,8 +24,13 @@
  */
 package net.runelite.api;
 
-import java.awt.Shape;
+import java.awt.*;
+
 import net.runelite.api.coords.Angle;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldPoint;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a game object.
@@ -33,8 +38,7 @@ import net.runelite.api.coords.Angle;
  * Most object in the RuneScape world are considered as game objects. Things
  * such as trees, anvils, boxes, etc are all game objects.
  */
-public interface GameObject extends TileObject
-{
+public interface GameObject extends TileObject, Locatable {
 	/**
 	 * Get the size of this object, in tiles, on the x axis
 	 *
@@ -103,4 +107,112 @@ public interface GameObject extends TileObject
 	 * }</pre>
 	 */
 	int getConfig();
+
+	@Override
+	default long getHash() {
+		return 0;
+	}
+
+	@Override
+	default int getX() {
+		return 0;
+	}
+
+	@Override
+	default int getY() {
+		return 0;
+	}
+
+	@Override
+	default int getZ() {
+		return 0;
+	}
+
+	@Override
+	default int getPlane() {
+		return 0;
+	}
+
+	@Override
+	default int getId() {
+		return 0;
+	}
+
+	@NotNull
+	@Override
+	default WorldPoint getWorldLocation() {
+		return null;
+	}
+
+	@NotNull
+	@Override
+	default LocalPoint getLocalLocation() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Point getCanvasLocation() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Point getCanvasLocation(int zOffset) {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Polygon getCanvasTilePoly() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Point getCanvasTextLocation(Graphics2D graphics, String text, int zOffset) {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Point getMinimapLocation() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	default Shape getClickbox() {
+		return null;
+	}
+
+	@Override
+	default String getName() {
+		return null;
+	}
+
+	@Override
+	default String[] getActions() {
+		return new String[0];
+	}
+
+	@Override
+	default Point menuPoint() {
+		return null;
+	}
+
+	@Override
+	default ObjectComposition getTransformedComposition() {
+		return null;
+	}
+
+	@Override
+	default void setTransformedComposition(ObjectComposition composition) {
+
+	}
+
+	@Override
+	default int getActualId() {
+		return 0;
+	}
 }

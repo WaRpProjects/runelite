@@ -24,19 +24,96 @@
  */
 package net.runelite.api;
 
-import java.awt.Canvas;
+import com.google.inject.Inject;
 
+import java.awt.Canvas;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.BooleanSupplier;
+
+import net.runelite.api.Client;
 /**
  * Represents the client game engine.
  */
 public interface GameEngine
 {
+
+	final ConcurrentLinkedQueue<BooleanSupplier> invokes = new ConcurrentLinkedQueue<>();
 	/**
 	 * Gets the canvas that contains everything.
 	 *
 	 * @return the game canvas
 	 */
 	Canvas getCanvas();
+
+	public default void invoke(Runnable r)
+	{
+		invoke(() ->
+		{
+			r.run();
+			return true;
+		});
+	}
+
+
+	  public default void invoke(BooleanSupplier r)
+	{
+		if (isClientThread())
+		{
+			if (!r.getAsBoolean())
+			{
+				invokes.add(r);
+			}
+			return;
+		}
+
+		invokeLater(r);
+	}
+
+	public default void invokeLater(Runnable r)
+	{
+		invokeLater(() ->
+		{
+			r.run();
+			return true;
+		});
+	}
+
+	public static void invokeLater(BooleanSupplier r)
+	{
+		invokes.add(r);
+	}
+
+	default void invoke()
+	{
+		assert isClientThread();
+		Iterator<BooleanSupplier> ir = invokes.iterator();
+		while (ir.hasNext())
+		{
+			BooleanSupplier r = ir.next();
+			boolean remove = true;
+			try
+			{
+				remove = r.getAsBoolean();
+			}
+			catch (ThreadDeath d)
+			{
+				throw d;
+			}
+			catch (Throwable e)
+			{
+				//log.error("Exception in invoke", e);
+			}
+			if (remove)
+			{
+				ir.remove();
+			}
+			else
+			{
+				//log.trace("Deferring task {}", r);
+			}
+		}
+	}
 
 	/**
 	 * Gets the client main thread.
@@ -53,4 +130,6 @@ public interface GameEngine
 	boolean isClientThread();
 
 	void resizeCanvas();
+
+	void invoke(Object o);
 }

@@ -186,6 +186,8 @@ public final class WidgetID
 	public static final int TOA_RAID_GROUP_ID = 481;
 	public static final int ACHIEVEMENT_DIARY_SCROLL_GROUP_ID = 741;
 
+
+
 	static class WorldMap
 	{
 		static final int MAPVIEW = 7;
@@ -1142,9 +1144,28 @@ public final class WidgetID
 		static final int CONTAINER = 2;
 	}
 
+	// Also used for many other interfaces!
 	static class BankPin
 	{
 		static final int CONTAINER = 0;
+		static final int TOP_LEFT_TEXT = 2;
+		static final int FIRST_ENTERED = 3;
+		static final int SECOND_ENTERED = 4;
+		static final int THIRD_ENTERED = 5;
+		static final int FOURTH_ENTERED = 6;
+		static final int INSTRUCTION_TEXT = 10;
+		static final int EXIT_BUTTON = 13;
+		static final int FORGOT_BUTTON = 15;
+		static final int BUTTON_1 = 16;
+		static final int BUTTON_2 = 18;
+		static final int BUTTON_3 = 20;
+		static final int BUTTON_4 = 22;
+		static final int BUTTON_5 = 24;
+		static final int BUTTON_6 = 26;
+		static final int BUTTON_7 = 28;
+		static final int BUTTON_8 = 30;
+		static final int BUTTON_9 = 32;
+		static final int BUTTON_10 = 34;
 	}
 
 	static class TrailblazerAreas

@@ -1,4 +1,4 @@
-package net.runelite.api.utils;
+package net.runelite.api.objects;
 
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;

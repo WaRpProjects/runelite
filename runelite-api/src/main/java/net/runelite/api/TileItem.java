@@ -36,4 +36,6 @@ public interface TileItem extends Renderable
 	int getId();
 
 	int getQuantity();
+
+    Tile getTile();
 }

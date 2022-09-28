@@ -14,13 +14,30 @@ public class Random {
     protected static final java.util.Random random = new java.util.Random();
 
 
-
+    /**
+     * Returns random int in range
+     * @param min
+     * @param max
+     * @return
+     */
     public int getRandomIntBetweenRange(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
-    public int getRandomSleepBetweenRange(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
+    /**
+     * Returns random sleep time
+     * @param min
+     * @param max
+     * @return
+     */
+    public int getRandomSleepBetweenRange(int min, int max) { return ThreadLocalRandom.current().nextInt(min, max + 1); }
+
+    /**
+     * Returns a random number
+     * @param min
+     * @param max
+     * @return
+     */
+    public int getRandomNumber(int min, int max) { return ThreadLocalRandom.current().nextInt(min, max + 1); }
 
 }

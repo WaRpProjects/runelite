@@ -10,12 +10,6 @@ public class Sleep {
     private Random random;
 
     /**
-     *
-     *  UTILITY FUNCTIONS
-     *
-     */
-
-    /**
      * Pauses execution for a random amount of time between two values.
      *
      * @param minSleep The minimum time to sleep.
@@ -27,8 +21,7 @@ public class Sleep {
     }
 
     /**
-     * Pauses execution for a given number of milliseconds.
-     *
+     * Pauses execution for a given number of milliseconds
      * @param toSleep The time to sleep in milliseconds.
      */
     public void sleep(int toSleep) {
@@ -46,6 +39,10 @@ public class Sleep {
         }
     }
 
+    /**
+     * Pauses execution for a given number of milliseconds
+     * @param toSleep The time to sleep in milliseconds.
+     */
     public void sleep(long toSleep) {
         try {
             long start = System.currentTimeMillis();

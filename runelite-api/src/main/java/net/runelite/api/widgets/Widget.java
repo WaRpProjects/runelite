@@ -55,7 +55,17 @@ public interface Widget
 	 * @see WidgetID
 	 */
 	int getId();
-
+	/**
+	 * Check if the item is dragged
+	 * @param index
+	 * @return
+	 */
+	boolean isWidgetItemDragged(int index);
+	/**
+	 * Returns offset of item to Point
+	 * @return
+	 */
+	Point getWidgetItemDragOffsets();
 	/**
 	 * Gets the type of the widget.
 	 *

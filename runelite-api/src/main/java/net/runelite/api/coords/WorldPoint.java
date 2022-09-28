@@ -446,4 +446,9 @@ public class WorldPoint
 		}
 		return false;
 	}
+
+	public WorldArea toWorldArea()
+	{
+		return new WorldArea(x, y, 1, 1, plane);
+	}
 }

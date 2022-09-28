@@ -3,16 +3,16 @@ package net.runelite.client.plugins.nootplugins;
 import com.google.inject.Provides;
 import net.runelite.api.*;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.utils.LegacyMenuEntry;
-import net.runelite.api.utils.FindObjects;
+import net.runelite.api.utils.*;
+import net.runelite.api.objects.FindObjects;
 import net.runelite.api.mouse.MouseUtil;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.api.mouse.MouseUtil;
-import net.runelite.api.utils.MenuUtils;
 
 import javax.inject.Inject;
 import java.awt.*;
@@ -31,6 +31,10 @@ public class NootPlugin extends Plugin {
     private Client client;
     @Inject
     private FindObjects findObject;
+    @Inject
+    private Sleep sleep;
+    @Inject BankUtils bankUtils;
+    @Inject InventoryUtils inventoryUtils;
     @Inject
     private MenuUtils menu;
     private LegacyMenuEntry targetMenu;
@@ -52,16 +56,19 @@ public class NootPlugin extends Plugin {
     robot = new Robot();
     }
 
-
+    //1515 946
     @Subscribe
     public void onGameTick(GameTick event)
     {
-        //test =  findObject.findNearestGameObject(14928);
-        test = findObject.findNearestBank();
-        if (isRunning)
-        {
-            log.debug("Running is true");
+        if (!inventoryUtils.isOpen()) {
+            inventoryUtils.openInventory();
         }
+        if (inventoryUtils.isOpen()) {
+            inventoryUtils.interactWithItem(946, false, 154);
+            inventoryUtils.interactWithItem(1515, false, 154);
+        }
+
+
     }
 
     @Subscribe
@@ -85,6 +92,7 @@ public class NootPlugin extends Plugin {
                 menu.setEntry(targetMenu);
                 Rectangle r = test.getConvexHull().getBounds();
                 mouse.moveClick(r);
+
             }
             else
             {

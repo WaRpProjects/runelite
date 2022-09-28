@@ -1,6 +1,9 @@
 package net.runelite.api.mouse;
 
 import net.runelite.api.Client;
+import net.runelite.api.MenuEntry;
+import net.runelite.api.utils.LegacyMenuEntry;
+import net.runelite.api.utils.MenuUtils;
 import net.runelite.api.utils.Sleep;
 import net.runelite.api.random.Random;
 import net.runelite.api.widgets.Widget;
@@ -31,6 +34,8 @@ public class MouseClick {
     private Random random;
     @Inject
     private Sleep sleep;
+    @Inject
+    private MenuUtils menu;
 
     ExecutorService executorService;
 
@@ -79,6 +84,44 @@ public class MouseClick {
                                 throw new RuntimeException(e);
                     }
             moveClick(finalClickPoint);
+                }
+        );
+
+        log.debug("[MouseUtil] - Done moving and clicking on point.");
+    }
+
+    public void handleMouseClick(Rectangle rectangle, LegacyMenuEntry m) {
+        Point point = getClickPoint(rectangle);
+        handleMouseClick(point, m);
+    }
+
+    public void handleMouseClick(Point point, LegacyMenuEntry m)
+    {
+
+        final int viewportHeight = client.getViewportHeight();
+        final int viewportWidth = client.getViewportWidth();
+
+        Widget minimapWidget = client.getWidget(164, 20);
+
+        if (point.getX() > viewportWidth || point.getY() > viewportHeight || point.getX() < 0 || point.getY() < 0) {
+            point = new Point(client.getCenterX() + random.getRandomIntBetweenRange(-100, 100),
+                    client.getCenterY() + random.getRandomIntBetweenRange(-100, 100));
+        }
+
+        log.debug("[MouseUtil] - Starting Mouse handler on a different thread.");
+        Point finalClickPoint = point;
+        executorService.submit(() ->
+                {
+                    moveMouseEvent(finalClickPoint);
+                    try {
+                        Thread.sleep(random.getRandomIntBetweenRange(394, 1203));
+                    }
+                    catch (InterruptedException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                    menu.setEntry(m);
+                    moveClick(finalClickPoint);
                 }
         );
 

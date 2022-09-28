@@ -26,6 +26,8 @@ package net.runelite.api;
 
 import net.runelite.api.coords.LocalPoint;
 
+import javax.inject.Inject;
+
 /**
  * Represents a projectile entity. (ie. cannonball, arrow)
  */
@@ -143,6 +145,7 @@ public interface Projectile extends Renderable
 	 * @return the x-axis coordinate
 	 */
 	double getX();
+
 
 	/**
 	 * Gets the current y-axis coordinate of the projectile.

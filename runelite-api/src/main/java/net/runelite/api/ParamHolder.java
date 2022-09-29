@@ -54,4 +54,5 @@ public interface ParamHolder
 	 * Sets the value of a given {@link ParamID}
 	 */
 	void setValue(int paramID, String value);
+
 }

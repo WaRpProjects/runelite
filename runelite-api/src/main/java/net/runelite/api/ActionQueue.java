@@ -2,9 +2,9 @@ package net.runelite.api;
 
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.GameTick;
+import net.runelite.client.callback.ClientThread;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,7 +20,7 @@ public class ActionQueue {
     private Client client;
 
     @Inject
-    private GameEngine clientThread;
+    private ClientThread clientThread;
 
     public final List<DelayedAction> delayedActions = new ArrayList<>();
     private int clientTick = 0;

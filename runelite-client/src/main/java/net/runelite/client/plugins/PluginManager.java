@@ -343,7 +343,6 @@ public class PluginManager
 			if (clazz.getSuperclass() != Plugin.class)
 			{
 				log.warn("Class {} has plugin descriptor, but is not a plugin", clazz);
-				continue;
 			}
 
 			if (!pluginDescriptor.loadWhenOutdated() && isOutdated)

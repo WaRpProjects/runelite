@@ -42,7 +42,7 @@ import net.runelite.api.Perspective;
  * instance.
  */
 @Value
-public class WorldPoint
+public class WorldPoint implements Positionable
 {
 	private static final int[] REGION_MIRRORS = {
 		// Prifddinas
@@ -450,5 +450,15 @@ public class WorldPoint
 	public WorldArea toWorldArea()
 	{
 		return new WorldArea(x, y, 1, 1, plane);
+	}
+
+	@Override
+	public int getWorldX() {
+		return x;
+	}
+
+	@Override
+	public int getWorldY() {
+		return y;
 	}
 }

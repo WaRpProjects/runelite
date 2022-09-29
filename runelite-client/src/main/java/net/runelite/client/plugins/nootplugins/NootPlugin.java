@@ -60,15 +60,6 @@ public class NootPlugin extends Plugin {
     @Subscribe
     public void onGameTick(GameTick event)
     {
-        if (!inventoryUtils.isOpen()) {
-            inventoryUtils.openInventory();
-        }
-        if (inventoryUtils.isOpen()) {
-            inventoryUtils.interactWithItem(946, false, 154);
-            inventoryUtils.interactWithItem(1515, false, 154);
-        }
-
-
     }
 
     @Subscribe

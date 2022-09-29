@@ -38,4 +38,6 @@ public interface TileItem extends Renderable
 	int getQuantity();
 
     Tile getTile();
+
+    void interact(String action);
 }

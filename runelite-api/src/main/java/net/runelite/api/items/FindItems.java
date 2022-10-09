@@ -2,7 +2,7 @@ package net.runelite.api.items;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.mouse.MouseUtil;
+import net.runelite.api.utils.MouseUtils;
 import net.runelite.api.utils.LegacyMenuEntry;
 import net.runelite.api.utils.LegacyInventoryAssistant;
 import net.runelite.api.widgets.WidgetItem;
@@ -26,7 +26,7 @@ public class FindItems {
     LegacyInventoryAssistant legacyInventory;
 
     @Inject
-    MouseUtil mouse;
+    MouseUtils mouse;
 
     public void interactWithItem(int itemID, long delay, String... option) {
         interactWithItem(itemID, false, delay, option);

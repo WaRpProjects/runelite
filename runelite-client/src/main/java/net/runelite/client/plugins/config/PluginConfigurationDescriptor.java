@@ -38,7 +38,7 @@ import net.runelite.client.util.LinkBrowser;
 
 @Value
 @RequiredArgsConstructor
-class PluginConfigurationDescriptor
+public class PluginConfigurationDescriptor
 {
 	private final String name;
 	private final String description;

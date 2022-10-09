@@ -70,7 +70,7 @@ import net.runelite.client.util.Text;
 
 @Slf4j
 @Singleton
-class PluginListPanel extends PluginPanel
+public class PluginListPanel extends PluginPanel
 {
 	private static final String RUNELITE_GROUP_NAME = RuneLiteConfig.class.getAnnotation(ConfigGroup.class).value();
 	private static final String PINNED_PLUGINS_CONFIG_KEY = "pinnedPlugins";

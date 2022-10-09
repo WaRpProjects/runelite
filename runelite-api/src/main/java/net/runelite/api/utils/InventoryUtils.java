@@ -2,7 +2,6 @@ package net.runelite.api.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.mouse.MouseUtil;
 import net.runelite.api.queries.InventoryItemQuery;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -15,10 +14,8 @@ import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,7 +26,7 @@ public class InventoryUtils {
     private Client client;
 
     @Inject
-    private MouseUtil mouse;
+    private MouseUtils mouse;
 
     @Inject
     private MenuUtils menu;

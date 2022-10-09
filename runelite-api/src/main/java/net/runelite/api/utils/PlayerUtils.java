@@ -5,16 +5,13 @@ import net.runelite.api.Client;
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
-import net.runelite.api.ItemID;
 import net.runelite.api.Player;
 import net.runelite.api.Varbits;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.mouse.MouseUtil;
 import net.runelite.api.random.CalculationUtils;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
-import net.runelite.api.random.Calculations;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,7 +29,7 @@ public class PlayerUtils {
     private Client client;
 
     @Inject
-    private MouseUtil mouse;
+    private MouseUtils mouse;
 
     @Inject
     private MenuUtils menu;

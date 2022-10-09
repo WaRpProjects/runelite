@@ -27,11 +27,60 @@ package net.runelite.client.plugins;
 import com.google.inject.Binder;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.Static;
+import net.runelite.client.config.RuneLiteConfig;
 
+import javax.swing.*;
+@Slf4j
 public abstract class Plugin implements Module
 {
 	protected Injector injector;
 
+	public static boolean stopPlugin(Plugin plugin)
+	{
+		try
+		{
+			assert SwingUtilities.isEventDispatchThread();
+			getPluginManager().remove(plugin);
+			getPluginManager().setPluginEnabled(plugin, false);
+			return getPluginManager().stopPlugin(plugin);
+		}
+		catch (PluginInstantiationException e)
+		{
+			log.error("Failed to stop plugin {}, error: {}", plugin.getClass().getSimpleName(), e);
+			return false;
+		}
+	}
+
+	public static boolean startPlugin(Plugin plugin)
+	{
+		try
+		{
+			getPluginManager().setPluginEnabled(plugin, true);
+			return getPluginManager().startPlugin(plugin);
+		}
+		catch (PluginInstantiationException e)
+		{
+			log.error("Failed to start plugin {}, error: {}", plugin.getClass().getSimpleName(), e);
+			return false;
+		}
+	}
+
+	public static PluginManager getPluginManager()
+	{
+		return Static.getPluginManager();
+	}
+
+	public static boolean isEnabled(Plugin plugin)
+	{
+		return getPluginManager().isPluginEnabled(plugin);
+	}
+
+	public static boolean isEnabled(String configGroup)
+	{
+		return Static.getConfigManager().getConfiguration(RuneLiteConfig.GROUP_NAME, configGroup, Boolean.class);
+	}
 	@Override
 	public final int hashCode()
 	{

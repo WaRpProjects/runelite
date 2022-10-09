@@ -1,7 +1,6 @@
 package net.runelite.api.mouse;
 
 import net.runelite.api.Client;
-import net.runelite.api.MenuEntry;
 import net.runelite.api.utils.LegacyMenuEntry;
 import net.runelite.api.utils.MenuUtils;
 import net.runelite.api.utils.Sleep;
@@ -17,15 +16,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 
 @Slf4j
 @SuppressWarnings("unused")
 @Singleton
-public class MouseClick {
+public class MouseHandler {
 
     //Executor thread for the mouse.
-    public MouseClick() {
+    public MouseHandler() {
         executorService = Executors.newFixedThreadPool(1);
     }
     @Inject
@@ -46,6 +46,54 @@ public class MouseClick {
      * ToDo Make it Spoofable.
      */
 
+
+
+    public void mouseClick(Rectangle rectangle) {
+        Point point = getClickPoint(rectangle);
+        mouseClick(point);
+    }
+
+    public void mouseClick(Point p) {
+        assert !client.isClientThread();
+        if (client.isStretchedEnabled()) {
+            final Dimension stretched = client.getStretchedDimensions();
+            final Dimension real = client.getRealDimensions();
+            final double width = (stretched.width / real.getWidth());
+            final double height = (stretched.height / real.getHeight());
+            final Point point = new Point((int) (p.getX() * width), (int) (p.getY() * height));
+            mouseEvent(501, point);
+            mouseEvent(502, point);
+            mouseEvent(500, point);
+            return;
+        }
+        mouseEvent(501, p);
+        mouseEvent(502, p);
+        mouseEvent(500, p);
+    }
+
+    public void testMouseClick(Rectangle rectangle) {
+        Point point = getClickPoint(rectangle);
+        testMouseClick(point);
+    }
+    public void testMouseClick(Point point) {
+
+        final int viewportHeight = client.getViewportHeight();
+        final int viewportWidth = client.getViewportWidth();
+
+        if (point.getX() > viewportWidth || point.getY() > viewportHeight || point.getX() < 0 || point.getY() < 0) {
+            point = new Point(this.client.getCenterX() + random.getRandomIntBetweenRange(-100, 100), this.client.getCenterY() + random.getRandomIntBetweenRange(-100, 100));
+
+            log.debug("[MouseUtil] - MouseClick started.");
+            Point finalClickPoint = point;
+            executorService.submit(() ->
+            {
+                mouseClick(finalClickPoint);
+            });
+            log.debug("[MouseUtil] - MouseClick Finished.");
+        }
+
+    }
+
     /**
      * Handles the mouseclick with moving.
      * @param rectangle
@@ -64,8 +112,6 @@ public class MouseClick {
         final int viewportHeight = client.getViewportHeight();
         final int viewportWidth = client.getViewportWidth();
 
-        Widget minimapWidget = client.getWidget(164, 20);
-
         if (point.getX() > viewportWidth || point.getY() > viewportHeight || point.getX() < 0 || point.getY() < 0) {
             point = new Point(client.getCenterX() + random.getRandomIntBetweenRange(-100, 100),
                     client.getCenterY() + random.getRandomIntBetweenRange(-100, 100));
@@ -75,27 +121,20 @@ public class MouseClick {
         Point finalClickPoint = point;
         executorService.submit(() ->
                 {
-                moveMouseEvent(finalClickPoint);
-                        try {
-                            Thread.sleep(random.getRandomIntBetweenRange(394, 1203));
-                        }
-                        catch (InterruptedException e)
-                        {
-                                throw new RuntimeException(e);
-                    }
+            moveClick(finalClickPoint);
             moveClick(finalClickPoint);
                 }
         );
 
         log.debug("[MouseUtil] - Done moving and clicking on point.");
     }
-
+/*
     public void handleMouseClick(Rectangle rectangle, LegacyMenuEntry m) {
         Point point = getClickPoint(rectangle);
         handleMouseClick(point, m);
     }
 
-    public void handleMouseClick(Point point, LegacyMenuEntry m)
+    public void handleMouseClick(@NotNull Point point, LegacyMenuEntry m)
     {
 
         final int viewportHeight = client.getViewportHeight();
@@ -127,6 +166,8 @@ public class MouseClick {
 
         log.debug("[MouseUtil] - Done moving and clicking on point.");
     }
+
+ */
 
 
     private void mouseEvent(int id, Point point) {
@@ -170,8 +211,9 @@ public class MouseClick {
     public Point getClickPoint(Rectangle rect) {
         final int x = (int) (rect.getX() + random.getRandomIntBetweenRange((int) rect.getWidth() / 6 * -1, (int) rect.getWidth() / 6) + rect.getWidth() / 2);
         final int y = (int) (rect.getY() + random.getRandomIntBetweenRange((int) rect.getHeight() / 6 * -1, (int) rect.getHeight() / 6) + rect.getHeight() / 2);
-
-        return new Point(x, y);
+        final int testX = (int) rect.getX();
+        final int testY = (int) rect.getY();
+        return new Point(testX, testY);
     }
 
     /**

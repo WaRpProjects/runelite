@@ -1,17 +1,17 @@
-package net.runelite.api.mouse;
+package net.runelite.api.utils;
 
 import net.runelite.api.ActionQueue;
-import net.runelite.api.MenuEntry;
-import net.runelite.api.utils.LegacyMenuEntry;
-import net.runelite.api.utils.MenuUtils;
+import net.runelite.api.Client;
+import net.runelite.api.mouse.MouseHandler;
+import net.runelite.client.callback.ClientThread;
 
 import javax.inject.Inject;
 import java.awt.*;
 
-public class MouseUtil {
+public class MouseUtils {
 
     @Inject
-    MouseClick mouse;
+    MouseHandler mouse;
     @Inject
     private MenuUtils menu;
     ActionQueue action;
@@ -24,8 +24,8 @@ public class MouseUtil {
         mouse.handleMouseClick(point);
     }
 
-    public void moveClick (Rectangle rectangle, LegacyMenuEntry menu) { mouse.handleMouseClick(rectangle, menu); }
-    public void moveClick (Point point, LegacyMenuEntry menu) { mouse.handleMouseClick(point, menu); }
+    public void mouseClick (Rectangle rectangle) { mouse.testMouseClick(rectangle);}
+
     public void doActionClientTick(LegacyMenuEntry entry, Rectangle rect, long ticksToDelay) {
         Point point = mouse.getClickPoint(rect);
         doActionClientTick(entry, point, ticksToDelay);

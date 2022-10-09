@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class Game {
 
     @Inject
-    public Client client;
+    public static Client client;
 
     @Inject
     private ActionQueue action;
@@ -31,6 +31,14 @@ public class Game {
 
     public static boolean sleeping = false;
     public static long millisDelay = 0;
+
+    public static boolean isLoggedIn() {
+        return client.getGameState() == GameState.LOGGED_IN;
+    }
+
+    public static GameState getState() {
+        return client.getGameState();
+    }
 
     public Client client() {
         return client;

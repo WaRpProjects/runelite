@@ -5,7 +5,7 @@ import net.runelite.api.*;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
-
+import net.runelite.client.callback.ClientThread;
 
 
 import javax.inject.Inject;
@@ -35,7 +35,7 @@ public class LegacyInventoryAssistant {
     Client client;
 
 
-    GameEngine clientThread;
+    ClientThread clientThread;
 
 
     public <T> T getFromClientThread(Supplier<T> supplier) {

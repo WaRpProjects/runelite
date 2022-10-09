@@ -5,9 +5,7 @@ import net.runelite.api.*;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.utils.*;
 import net.runelite.api.objects.FindObjects;
-import net.runelite.api.mouse.MouseUtil;
-import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.utils.MouseUtils;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
@@ -18,6 +16,7 @@ import javax.inject.Inject;
 import java.awt.*;
 
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.plugins.Script;
 
 @Slf4j
 @PluginDescriptor(
@@ -41,10 +40,11 @@ public class NootPlugin extends Plugin {
     @Inject
     private NootConfig config;
     @Inject
-    private MouseUtil mouse;
+    private MouseUtils mouse;
     private boolean isRunning = false;
     Robot robot;
     private GameObject test;
+
     @Provides
     NootConfig getConfig(ConfigManager configManager)
     {

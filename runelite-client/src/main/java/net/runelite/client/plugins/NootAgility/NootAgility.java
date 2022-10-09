@@ -31,7 +31,7 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
-import net.runelite.api.mouse.MouseUtil;
+import net.runelite.api.utils.MouseUtils;
 import net.runelite.api.random.CalculationUtils;
 import net.runelite.api.random.Random;
 import net.runelite.api.utils.*;
@@ -46,12 +46,8 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginManager;
 
-import net.runelite.client.ui.overlay.OverlayManager;
-
 import javax.inject.Inject;
 import java.awt.*;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,7 +67,7 @@ public class NootAgility extends Plugin {
     private Client client;
 
     @Inject
-    private MouseUtil mouse;
+    private MouseUtils mouse;
 
     @Inject
     private PlayerUtils playerUtils;

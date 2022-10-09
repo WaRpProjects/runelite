@@ -6,7 +6,6 @@ import net.runelite.api.queries.BankItemQuery;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
-import net.runelite.api.mouse.MouseUtil;
 import net.runelite.api.random.Random;
 
 import static net.runelite.api.NootConfig.iterating;
@@ -30,7 +29,7 @@ public class BankUtils {
     private Sleep sleep;
 
     @Inject
-    private MouseUtil mouse;
+    private MouseUtils mouse;
 
     @Inject
     private InventoryUtils inventory;

@@ -5,7 +5,7 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.scene.Position;
-import net.runelite.api.mouse.MouseClick;
+import net.runelite.api.mouse.MouseHandler;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class NootObject implements Locatable, Interactable {
     private final ObjectComposition definition;
 
     @Inject
-    private MouseClick mouse;
+    private MouseHandler mouse;
 
     public NootObject(Game game, TileObject tileObject, ObjectComposition definition) {
         this.game = game;

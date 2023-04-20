@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Abex
+ * Copyright (c) 2023, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,12 +22,23 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.api;
+package net.runelite.client.plugins.grandexchange;
 
-public final class DBTableID
+import com.google.gson.annotations.SerializedName;
+import java.time.Instant;
+import lombok.Data;
+
+@Data
+class Trade
 {
-	public interface Quest
-	{
-		int NAME = 2;
-	}
+	@SerializedName("b")
+	boolean buy;
+	@SerializedName("i")
+	int itemId;
+	@SerializedName("q")
+	int quantity;
+	@SerializedName("p")
+	int price;
+	@SerializedName("t")
+	Instant time;
 }

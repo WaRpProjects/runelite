@@ -28,17 +28,29 @@ public interface ActorSpotAnim extends Node
 {
 	/**
 	 * Get the spotanim id
-	 * @see GraphicID
+	 * @see net.runelite.api.gameval.SpotanimID
 	 * @return
 	 */
 	int getId();
 
 	/**
 	 * Set the spotanim id
-	 * @see GraphicID
+	 * @see net.runelite.api.gameval.SpotanimID
 	 * @param id
 	 */
 	void setId(int id);
+
+	/**
+	 * Get the client cycle that the spotanim starts at
+	 * @return
+	 */
+	int getStartCycle();
+
+	/**
+	 * Set the client cycle that the spotanim starts at
+	 * @param cycle
+	 */
+	void setStartCycle(int cycle);
 
 	/**
 	 * Get the spotanim height
